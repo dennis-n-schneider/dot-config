@@ -1,6 +1,9 @@
 function openZathuraIfConditionMet()
-    vim.fn.system("cd " .. vim.api.nvim_buf_get_name(0))
-    vim.fn.system("litemdview " .. vim.api.nvim_buf_get_name(0))
+    vim.cmd("write")
+    -- vim.fn.system("cd " .. vim.api.nvim_buf_get_name(0))
+    -- vim.fn.system("litemdview " .. vim.api.nvim_buf_get_name(0))
+    -- vim.cmd("!litemdview " .. vim.api.nvim_buf_get_name(0))
+    vim.fn.jobstart("litemdview " .. vim.api.nvim_buf_get_name(0), { stdout_buffered = true })
 end
 
 vim.api.nvim_set_keymap('n', '<leader>o', [[:lua openZathuraIfConditionMet()<CR>]], { noremap = true, silent = true })

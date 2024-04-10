@@ -125,7 +125,7 @@ require("obsidian").setup({
     ---@return string
     image_name_func = function()
         -- Prefix image names with timestamp.
-        return string.format("%s-", os.time())
+        return string.format("%s-pasted_image", os.time())
     end,
 
     -- Optional, boolean or a function that takes a filename and returns a boolean.
@@ -285,7 +285,6 @@ require("obsidian").setup({
         ---@param path obsidian.Path the absolute path to the image file
         ---@return string
         img_text_func = function(client, path)
-            path = client:vault_relative_path(path) or path
             return string.format("![%s](%s)", path.name, path)
         end,
     },
@@ -293,5 +292,6 @@ require("obsidian").setup({
 --
 -- Obsidian
 vim.api.nvim_set_keymap('n', '<leader>fo', [[:ObsidianSearch<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fp', [[:ObsidianPasteImg<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>rt', [[:ObsidianTemplate<CR>]], { noremap = true, silent = true })
 

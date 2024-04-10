@@ -9,7 +9,8 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.signcolumn = "yes"
 vim.o.fillchars = 'eob: '
-vim.o.listchars = 'leadmultispace:│   '
+vim.o.listchars = 'leadmultispace:    '
 vim.o.list = true
-vim.cmd([[colorscheme palenight]])
+vim.cmd([[colorscheme dracula]])
 vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])
+-- vim.cmd([[hi WinSeparator guifg=#ffffff]])

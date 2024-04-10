@@ -14,14 +14,37 @@ vim.o.showmatch = true
 
 vim.bo.undofile = true
 
-vim.cmd([[
-    if has("clipboard")
-        set clipboard=unnamed
-        if has("unnamedplus")
-            set clipboard+=unnamedplus
+
+
+if vim.env.SSH_TTY then
+    vim.g.clipboard = {
+        name = 'OSC 52',
+        copy = {
+            ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+            ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+        },
+        paste = {
+            ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+            ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+        },
+    }
+else
+    vim.cmd([[
+        if has("clipboard")
+            set clipboard=unnamed
+            if has("unnamedplus")
+                set clipboard+=unnamedplus
+            endif
         endif
-    endif
-]])
+    ]])
+end
+
+-- Disable Node.js provider.
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.python3_host_prog = '/home/dns/.local/venv/nvim/bin/python'
+
 
 -- Note: Running the check 1e6 times takes 1.1 seconds.
 -- Execute current file.

@@ -84,6 +84,7 @@ function fuzzy_nvim_start {
     fi
 }
 alias v='fuzzy_nvim_start'
+alias o='nvim +ObsidianSearch'
 
 ## Drag-and-drop in terminal
 alias drag='dragon-drop -a -x'
@@ -100,4 +101,4 @@ alias gpp='git push'
 alias mn='nvim+"Telescope man_pages layout_config={height=0.9}"'
 
 alias ma='ssh -o "ConnectTimeout=3" -L 16006:localhost:6006 -t ma "cd /media/student/Videodaten/dennis; bash --rcfile \"/media/student/Videodaten/dennis/.bashrc\""'
-alias miti='kitten ssh -o "ConnectTimeout=3" -L 16006:localhost:6006 -t miti "cd /media/mitiadmin/Micron_7450_1/lars/GraphNeuralNetwork; bash --rcfile \"/media/mitiadmin/Micron_7450_1/lars/GraphNeuralNetwork/.bashrc\""'
+alias miti='kitten ssh -o "ConnectTimeout=3" -t miti "bash --rcfile \"/media/mitiadmin/Micron_7450_1/lars/GraphNeuralNetwork/.bashrc\""'

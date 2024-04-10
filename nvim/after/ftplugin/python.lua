@@ -4,6 +4,10 @@ vim.opt_local.colorcolumn = '101'
 -- Keybindings
 vim.api.nvim_buf_set_keymap(0, 'i', '<M-i>', ' = ', { noremap = true })
 
+vim.api.nvim_buf_set_keymap(0, 'n', '<c-q>', '<Cmd>call Black()<CR>', { noremap = true })
+vim.api.nvim_buf_set_keymap(0, 'n', '<c-w>', ':Isort<CR>', { noremap = true })
+
+
 -- Section insert
 -- EC.section_python = function()
 --   -- Insert section template

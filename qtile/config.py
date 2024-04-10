@@ -1,6 +1,4 @@
-import subprocess
-from libqtile.log_utils import logger
-from libqtile import bar, layout, widget
+frm libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 
@@ -33,28 +31,28 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     # Programs/Scripts.
     Key([mod], "r", lazy.spawn("ruler"), desc="Ruler"),
-    Key([mod], "p", lazy.spawn("sh .config/spectrwm/scripts/pass_menu.sh"), desc="Password manager"),
+    Key([mod], "p", lazy.spawn("sh .config/wm/scripts/pass_menu.sh"), desc="Password manager"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Terminal"),
     Key([mod], "b", lazy.spawn("qutebrowser"), desc="Browser"),
     # Auxiliary usages.
-    Key([mod], "c", lazy.spawn("sh .config/spectrwm/scripts/toggle_battery_mode.sh"), desc="Toggle battery usage mode"),
-    Key([mod, "shift"], "t", lazy.spawn("sh .config/spectrwm/scripts/toggle_mousepad.sh"), desc="Toggle trackpad"),
+    Key([mod], "c", lazy.spawn("sh .config/wm/scripts/toggle_battery_mode.sh"), desc="Toggle battery usage mode"),
+    Key([mod, "shift"], "t", lazy.spawn("sh .config/wm/scripts/toggle_mousepad.sh"), desc="Toggle trackpad"),
     Key([mod, "control"], "delete", lazy.spawn("betterlockscreen --lock"), desc="Lock screen"),
     Key([mod], "space", lazy.spawn("rofi -show run"), desc="Application launcher"),
     Key([mod], "s", lazy.spawn("flameshot gui"), desc="Screenshot"),
     Key([mod, "shift"], "s", lazy.spawn("flameshot screen"), desc="Screenshot entire screen"),
-    Key([mod], "i", lazy.spawn("sh .config/spectrwm/scripts/invert_colors.sh"), desc="Invert colors of focused window"),
-    Key([], "XF86MonBrightnessUp", lazy.spawn("sh /home/dns/.config/spectrwm/scripts/inc_brightness.sh"), desc="Increase screen brightness"),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("sh /home/dns/.config/spectrwm/scripts/dec_brightness.sh"), desc="Decrease screen brightness"),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("sh /home/dns/.config/spectrwm/scripts/inc_volume.sh"), desc="Increase audio volume"),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("sh /home/dns/.config/spectrwm/scripts/dec_volume.sh"), desc="Decrease audio volume"),
-    Key([], "XF86AudioMute", lazy.spawn("sh /home/dns/.config/spectrwm/scripts/mute_volume.sh"), desc="Mute audio"),
+    Key([mod], "i", lazy.spawn("sh .config/wm/scripts/invert_colors.sh"), desc="Invert colors of focused window"),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("sh /home/dns/.config/wm/scripts/inc_brightness.sh"), desc="Increase screen brightness"),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("sh /home/dns/.config/wm/scripts/dec_brightness.sh"), desc="Decrease screen brightness"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("sh /home/dns/.config/wm/scripts/inc_volume.sh"), desc="Increase audio volume"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("sh /home/dns/.config/wm/scripts/dec_volume.sh"), desc="Decrease audio volume"),
+    Key([], "XF86AudioMute", lazy.spawn("sh /home/dns/.config/wm/scripts/mute_volume.sh"), desc="Mute audio"),
     # Scratchpads
     Key([mod], 'm', lazy.group['scratchpads'].dropdown_toggle('mails'), desc="Mails"),
     Key([mod], 'a', lazy.group['scratchpads'].dropdown_toggle('music'), desc="Music player"),
     Key([mod], 'u', lazy.group['scratchpads'].dropdown_toggle('math'), desc="Math utility"),
-    Key([mod], 't', lazy.group['scratchpads'].dropdown_toggle('add_task'), desc="Task/ToDo list"),
-    Key([mod, "shift"], 'a', lazy.spawn("sh /home/dns/.config/spectrwm/scripts/download_music.sh"), desc="Audio download utility"),
+    Key([mod, "shift"], 'a', lazy.spawn("sh /home/dns/.config/wm/scripts/download_music.sh"), desc="Audio download utility"),
+    Key([mod], 'o', lazy.group['scratchpads'].dropdown_toggle('obsidian'), desc="Obsidian"),
 ]
 
 
@@ -94,8 +92,8 @@ groups.extend([
             warp_pointer = True,
         ),
         DropDown(
-            'add_task',
-            f'{terminal} -e sh /home/dns/.config/spectrwm/scripts/add_task.sh',
+            'obsidian',
+            f'{terminal} -e nvim +ObsidianSearch',
             height = 0.8,
             width = 0.4,
             x = 0.5,
@@ -161,7 +159,7 @@ screens = [
                                fontsize=16),
                 widget.Battery(not_charging_char=""),
                 widget.GenPollCommand(
-                    cmd="/home/dns/.config/spectrwm/scripts/charge_cycles_per_day.sh",
+                    cmd="/home/dns/.config/wm/scripts/charge_cycles_per_day.sh",
                     foreground="#AAAAAA",
                     update_interval=3600
                 ),

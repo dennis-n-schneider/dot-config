@@ -2,7 +2,7 @@ local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    fn.system({'git', 'clone', '--depth', '1', 'https://g ithub.com/wbthomason/packer.nvim', install_path})
     vim.cmd [[packadd packer.nvim]]
     return true
   end
@@ -26,6 +26,15 @@ return require('packer').startup(function()
     use "hrsh7th/cmp-cmdline" -- Make suggestions based on LSP.
     use "hrsh7th/cmp-nvim-lsp-signature-help" -- Make suggestions based on LSP.
     use "hrsh7th/nvim-cmp"-- Code completion.
+
+    -- Linting and Formatting
+    use {
+        "averms/black-nvim",
+        run = ':UpdateRemotePlugins'
+    }
+    use {'stsewd/isort.nvim', 
+        run = ':UpdateRemotePlugins'
+    }
 
     -- lsp
     use "neovim/nvim-lspconfig"
@@ -84,16 +93,21 @@ return require('packer').startup(function()
 
     -- colorscheme
     use {
-        'neanias/everforest-nvim'
-    }
-    use {
         'Mofiqul/dracula.nvim',
         config = function() require('dracula').setup({
             transparent_bg = true,
             italic_comment = true
         }) end
     }
-    use 'drewtempelmeyer/palenight.vim'
+
+    use {
+        'nvim-zh/colorful-winsep.nvim'
+    }
+
+    -- indentation lines
+    use {
+        'lukas-reineke/indent-blankline.nvim'
+    }
 
     -- Latex plugin
     -- ! VIMSCRPIT
@@ -103,13 +117,12 @@ return require('packer').startup(function()
 
     -- Show colors
     use {
-        'norcalli/nvim-colorizer.lua',
+        'brenoprata10/nvim-highlight-colors',
     }
 
-    ---- EXPERIMENTAL
-    -- bufferline
     use {'akinsho/bufferline.nvim', tag='v4.*', requires='nvim-tree/nvim-web-devicons'}
 
+    use {'tpope/vim-fugitive'}
     use {'lewis6991/gitsigns.nvim'}
 
     use {'lewis6991/impatient.nvim'}
@@ -121,16 +134,28 @@ return require('packer').startup(function()
         }
     }
 
-    use {'stsewd/isort.nvim', 
-        run = ':UpdateRemotePlugins'
-    }
-
     use {'folke/todo-comments.nvim',
         requires = {'nvim-lua/plenary.nvim'}
     }
 
+    use({
+        "epwalsh/obsidian.nvim",
+        tag = "*",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
+            "nvim-telescope/telescope.nvim",
+
+            -- see below for full list of optional dependencies 👇
+        },
+    })
+
+    use({
+        'nosduco/remote-sshfs.nvim',
+    })
+
     if packer_bootstrap then
-      require('packer').sync()
+        require('packer').sync()
     end
 end)
 

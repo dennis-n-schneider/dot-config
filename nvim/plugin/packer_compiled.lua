@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/dns/.cache/nvim/packer_hererocks/2.1.1702233742/share/lua/5.1/?.lua;/home/dns/.cache/nvim/packer_hererocks/2.1.1702233742/share/lua/5.1/?/init.lua;/home/dns/.cache/nvim/packer_hererocks/2.1.1702233742/lib/luarocks/rocks-5.1/?.lua;/home/dns/.cache/nvim/packer_hererocks/2.1.1702233742/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/dns/.cache/nvim/packer_hererocks/2.1.1702233742/lib/lua/5.1/?.so"
+local package_path_str = "/home/dns/.cache/nvim/packer_hererocks/2.1.1720049189/share/lua/5.1/?.lua;/home/dns/.cache/nvim/packer_hererocks/2.1.1720049189/share/lua/5.1/?/init.lua;/home/dns/.cache/nvim/packer_hererocks/2.1.1720049189/lib/luarocks/rocks-5.1/?.lua;/home/dns/.cache/nvim/packer_hererocks/2.1.1720049189/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/dns/.cache/nvim/packer_hererocks/2.1.1720049189/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -155,10 +155,26 @@ _G.packer_plugins = {
     path = "/home/dns/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["mini.icons"] = {
+    config = { "\27LJ\2\n<\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\15mini.icons\frequire\0" },
+    loaded = true,
+    path = "/home/dns/.local/share/nvim/site/pack/packer/start/mini.icons",
+    url = "https://github.com/echasnovski/mini.icons"
+  },
+  ["mini.nvim"] = {
+    loaded = true,
+    path = "/home/dns/.local/share/nvim/site/pack/packer/start/mini.nvim",
+    url = "https://github.com/echasnovski/mini.nvim"
+  },
   neogen = {
     loaded = true,
     path = "/home/dns/.local/share/nvim/site/pack/packer/start/neogen",
     url = "https://github.com/danymat/neogen"
+  },
+  ["nightfox.nvim"] = {
+    loaded = true,
+    path = "/home/dns/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
+    url = "https://github.com/EdenEast/nightfox.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -265,11 +281,6 @@ _G.packer_plugins = {
     path = "/home/dns/.local/share/nvim/site/pack/packer/start/todo-comments.nvim",
     url = "https://github.com/folke/todo-comments.nvim"
   },
-  ["true-zen.nvim"] = {
-    loaded = true,
-    path = "/home/dns/.local/share/nvim/site/pack/packer/start/true-zen.nvim",
-    url = "https://github.com/pocco81/true-zen.nvim"
-  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/dns/.local/share/nvim/site/pack/packer/start/vim-fugitive",
@@ -280,6 +291,11 @@ _G.packer_plugins = {
     path = "/home/dns/.local/share/nvim/site/pack/packer/start/vim-snippets",
     url = "https://github.com/honza/vim-snippets"
   },
+  ["vim-tmux-navigator"] = {
+    loaded = true,
+    path = "/home/dns/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
+    url = "https://github.com/christoomey/vim-tmux-navigator"
+  },
   vimtex = {
     loaded = true,
     path = "/home/dns/.local/share/nvim/site/pack/packer/start/vimtex",
@@ -289,6 +305,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/dns/.local/share/nvim/site/pack/packer/start/which-key.nvim",
     url = "https://github.com/folke/which-key.nvim"
+  },
+  ["zen-mode.nvim"] = {
+    loaded = true,
+    path = "/home/dns/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
+    url = "https://github.com/folke/zen-mode.nvim"
   }
 }
 
@@ -297,6 +318,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for dracula.nvim]], true)
 try_loadstring("\27LJ\2\n\\\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\19transparent_bg\2\19italic_comment\2\nsetup\fdracula\frequire\0", "config", "dracula.nvim")
 time([[Config for dracula.nvim]], false)
+-- Config for: mini.icons
+time([[Config for mini.icons]], true)
+try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\15mini.icons\frequire\0", "config", "mini.icons")
+time([[Config for mini.icons]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

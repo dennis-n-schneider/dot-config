@@ -18,6 +18,8 @@ return require('packer').startup(function()
     -- keybindings cheatsheet
     use 'folke/which-key.nvim'
 
+    use 'christoomey/vim-tmux-navigator'
+
     -- cmp
     use "dcampos/cmp-snippy" -- Suggest Snippets.
     use "hrsh7th/cmp-path" -- Suggest file paths.
@@ -34,6 +36,11 @@ return require('packer').startup(function()
     }
     use {'stsewd/isort.nvim', 
         run = ':UpdateRemotePlugins'
+    }
+    use {'echasnovski/mini.nvim',
+    }
+    use {'echasnovski/mini.icons',
+        config = function() require('mini.icons').setup({ }) end
     }
 
     -- lsp
@@ -86,12 +93,14 @@ return require('packer').startup(function()
     use {'kyazdani42/nvim-tree.lua', requires = {'kyazdani42/nvim-web-devicons'}, tag = 'nightly'}
 
     -- goyo-alternative
-    use 'pocco81/true-zen.nvim'
+    use 'folke/zen-mode.nvim'
 
     -- lualine
     use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
 
     -- colorscheme
+    use "EdenEast/nightfox.nvim"
+
     use {
         'Mofiqul/dracula.nvim',
         config = function() require('dracula').setup({
@@ -145,8 +154,6 @@ return require('packer').startup(function()
             "nvim-lua/plenary.nvim",
             "hrsh7th/nvim-cmp",
             "nvim-telescope/telescope.nvim",
-
-            -- see below for full list of optional dependencies 👇
         },
     })
 

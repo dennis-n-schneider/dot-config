@@ -15,7 +15,6 @@ vim.o.showmatch = true
 vim.bo.undofile = true
 
 
-
 if vim.env.SSH_TTY then
     vim.g.clipboard = {
         name = 'OSC 52',

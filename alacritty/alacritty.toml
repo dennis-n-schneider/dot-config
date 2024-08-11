@@ -12,22 +12,22 @@ vi_mode_style = "Block"
 
 [font]
 builtin_box_drawing = true
-size = 8
+size = 7
 
 [font.bold]
-family = "Nerd Nerd Font Mono"
+family = "Geist Mono"
 style = "Bold"
 
 [font.bold_italic]
-family = "Hack Nerd Font Mono"
+family = "Geist Mono"
 style = "Bold Italic"
 
 [font.italic]
-family = "Hack Nerd Font Mono"
+family = "Geist Mono"
 style = "Italic"
 
 [font.normal]
-family = "Hack Nerd Font Mono"
+family = "Geist Mono"
 style = "Regular"
 
 [hints]

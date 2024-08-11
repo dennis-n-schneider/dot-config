@@ -12,7 +12,7 @@ require('neoclip').setup({
     enable_macro_history = false,
     content_spec_column = false,
     content_spec_column = false,
-     on_paste = {
+    on_paste = {
         set_reg = false,
     },
     on_replay = {
@@ -23,6 +23,7 @@ require('neoclip').setup({
             i = {
                 select = '<cr>',
                 paste = '<c-p>',
+                paste_behind = '<c-;>',
                 replay = '<c-q>',  -- replay a macro
                 delete = '<c-d>',  -- delete an entry
                 custom = {},

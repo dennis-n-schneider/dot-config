@@ -11,6 +11,5 @@ vim.o.signcolumn = "yes"
 vim.o.fillchars = 'eob: '
 vim.o.listchars = 'leadmultispace:    '
 vim.o.list = true
-vim.cmd([[colorscheme dracula]])
+vim.cmd([[colorscheme carbonfox]])
 vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])
--- vim.cmd([[hi WinSeparator guifg=#ffffff]])

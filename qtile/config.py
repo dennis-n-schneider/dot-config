@@ -1,4 +1,4 @@
-frm libqtile import bar, layout, widget
+from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 
@@ -32,7 +32,7 @@ keys = [
     # Programs/Scripts.
     Key([mod], "r", lazy.spawn("ruler"), desc="Ruler"),
     Key([mod], "p", lazy.spawn("sh .config/wm/scripts/pass_menu.sh"), desc="Password manager"),
-    Key([mod], "Return", lazy.spawn(terminal), desc="Terminal"),
+    Key([mod], "Return", lazy.spawn(f"{terminal} -e tmux"), desc="Terminal"),
     Key([mod], "b", lazy.spawn("qutebrowser"), desc="Browser"),
     # Auxiliary usages.
     Key([mod], "c", lazy.spawn("sh .config/wm/scripts/toggle_battery_mode.sh"), desc="Toggle battery usage mode"),
@@ -42,17 +42,18 @@ keys = [
     Key([mod], "s", lazy.spawn("flameshot gui"), desc="Screenshot"),
     Key([mod, "shift"], "s", lazy.spawn("flameshot screen"), desc="Screenshot entire screen"),
     Key([mod], "i", lazy.spawn("sh .config/wm/scripts/invert_colors.sh"), desc="Invert colors of focused window"),
-    Key([], "XF86MonBrightnessUp", lazy.spawn("sh /home/dns/.config/wm/scripts/inc_brightness.sh"), desc="Increase screen brightness"),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("sh /home/dns/.config/wm/scripts/dec_brightness.sh"), desc="Decrease screen brightness"),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("sh /home/dns/.config/wm/scripts/inc_volume.sh"), desc="Increase audio volume"),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("sh /home/dns/.config/wm/scripts/dec_volume.sh"), desc="Decrease audio volume"),
-    Key([], "XF86AudioMute", lazy.spawn("sh /home/dns/.config/wm/scripts/mute_volume.sh"), desc="Mute audio"),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("sh .config/wm/scripts/inc_brightness.sh"), desc="Increase screen brightness"),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("sh .config/wm/scripts/dec_brightness.sh"), desc="Decrease screen brightness"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("sh .config/wm/scripts/inc_volume.sh"), desc="Increase audio volume"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("sh .config/wm/scripts/dec_volume.sh"), desc="Decrease audio volume"),
+    Key([], "XF86AudioMute", lazy.spawn("sh .config/wm/scripts/mute_volume.sh"), desc="Mute audio"),
     # Scratchpads
     Key([mod], 'm', lazy.group['scratchpads'].dropdown_toggle('mails'), desc="Mails"),
     Key([mod], 'a', lazy.group['scratchpads'].dropdown_toggle('music'), desc="Music player"),
     Key([mod], 'u', lazy.group['scratchpads'].dropdown_toggle('math'), desc="Math utility"),
-    Key([mod, "shift"], 'a', lazy.spawn("sh /home/dns/.config/wm/scripts/download_music.sh"), desc="Audio download utility"),
+    Key([mod, "shift"], 'a', lazy.spawn("sh .config/wm/scripts/download_music.sh"), desc="Audio download utility"),
     Key([mod], 'o', lazy.group['scratchpads'].dropdown_toggle('obsidian'), desc="Obsidian"),
+    Key([mod], 'y', lazy.group['scratchpads'].dropdown_toggle('files'), desc="File manager"),
 ]
 
 
@@ -101,11 +102,21 @@ groups.extend([
             on_focus_lost_hide = True,
             warp_pointer = True,
         ),
+        DropDown(
+            'files',
+            f'{terminal} -e yazi',
+            height = 0.8,
+            width = 0.4,
+            x = 0.5,
+            y = 0.1,
+            on_focus_lost_hide = True,
+            warp_pointer = True,
+        ),
     ]),
 ])
 
 layout_default_args = {
-    "border_focus":"#EEEEFF",
+    "border_focus":"#BD93F9",
     "border_width":1,
     "new_client_position":"bottom",
     "single_border_width":0,
@@ -198,6 +209,8 @@ floating_layout = layout.Floating(
         Match(title="branchdialog"),  # gitk
         Match(wm_class="pinentry-gtk-2"),  # GPG key password entry
         Match(wm_class="com.cisco.anyconnect.gui"),  # GPG key password entry
+        Match(wm_class="Tk"), # Tkinter stuff.
+        Match(wm_class="Toplevel"), # Tkinter stuff.
     ]
 )
 auto_fullscreen = True

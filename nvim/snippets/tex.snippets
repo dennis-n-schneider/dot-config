@@ -1,2 +1,10 @@
 snippet #! "Shebang"
 	\iffalse; /usr/bin/env pdflatex $0 && exit # \fi
+
+snippet frm "Create Beamer-Frame"
+	\begin{frame}{$1}{$2}
+		{$3}
+	\end{frame}
+
+snippet -> "Right Arrow"
+	$\rightarrow$

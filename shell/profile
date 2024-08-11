@@ -4,7 +4,6 @@
 # Deactivate creation of python_history
 export PYTHONSTARTUP=~/.config/python/pythonrc
 
-export PATH="$PATH:$HOME/.local/bin:$HOME/.local/share/cargo/bin:$HOME/.emacs.d/bin:/opt/cisco/anyconnect/bin"
 unsetopt PROMPT_SP
 
 # Default programs
@@ -31,6 +30,7 @@ export STARSHIP_CONFIG=$XDG_CONFIG_HOME/zsh/starship/starship.toml
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 export CARGO_HOME=$XDG_DATA_HOME/cargo
 export GOPATH=$XDG_DATA_HOME/go
+export GOBIN=$GOPATH/bin
 export GOMODCACHE=$XDG_DATA_HOME/go/mod
 export PYENV_ROOT=$XDG_DATA_HOME/pyenv
 export PARALLEL_HOME="$XDG_DATA_HOME/parallel"
@@ -46,6 +46,7 @@ export FZF_COMPLETION_OPTS='--hidden --exclude ".git" --preview="bat"'
 source $XDG_CONFIG_HOME/nnn/config.nnn
 export LS_COLORS="$(vivid generate dracula)"
 
+export PATH="$PATH:$(go env GOBIN):$HOME/.local/bin:$HOME/.local/share/cargo/bin:$HOME/.emacs.d/bin:/opt/cisco/anyconnect/bin"
 
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
     # use custom-placed xinitrc, so it does not clutter the home-dir

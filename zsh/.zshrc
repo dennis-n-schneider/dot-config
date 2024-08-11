@@ -69,10 +69,7 @@ eval "$(zoxide init zsh)"
 # pyenv
 eval "$(pyenv init -)"
 
-
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
-
+source <(fzf --zsh)
 
 function set_win_title() {
     echo -ne "\033]0; Alacritty: $(basename "$PWD") \007"

@@ -6,7 +6,7 @@ alias \
 	cp="cp -iv" \
 	mv="mv -iv" \
 	mkd="mkdir -pv" \
-	cat="bat --plain --theme OneHalfDark " \
+	cat="bat --plain --theme Dracula " \
     s="kitten ssh" # Kitty-stuff.
 
 # Colorize commands when possible
@@ -34,7 +34,15 @@ alias \
     open="xdg-open" \
     nb="newsboat" \
     bt="bluetuith" \
-    e="emacsclient -nc"
+    e="emacsclient -nc" \
+    y="yazi"
+
+# Clear pacman cache.
+# Remove orphaned packages.
+alias clean="""
+    yay -Scc;
+    yay -Qtdq | yay -Rns -;
+"""
 
 # Make aliasrc POSIX-compliant. Only load if command exists for this shell
 #if command -v pushd &> /dev/null
@@ -72,7 +80,7 @@ function save_remove {
 alias rm='save_remove'
 
 # Fuzzy Find
-alias fzf="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+# alias fzf="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
 function fuzzy_nvim_start {
     if [ "$#" -eq 0 ]; then

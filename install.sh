@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Copy configurations.
-cp -ar config ~/.config
+cp -ar config/* ~/.config
 
 # Install packages.
 if which yay &> /dev/null; then

@@ -2,7 +2,7 @@ local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    fn.system({'git', 'clone', '--depth', '1', 'https://g ithub.com/wbthomason/packer.nvim', install_path})
     vim.cmd [[packadd packer.nvim]]
     return true
   end
@@ -18,6 +18,8 @@ return require('packer').startup(function()
     -- keybindings cheatsheet
     use 'folke/which-key.nvim'
 
+    use 'christoomey/vim-tmux-navigator'
+
     -- cmp
     use "dcampos/cmp-snippy" -- Suggest Snippets.
     use "hrsh7th/cmp-path" -- Suggest file paths.
@@ -26,6 +28,20 @@ return require('packer').startup(function()
     use "hrsh7th/cmp-cmdline" -- Make suggestions based on LSP.
     use "hrsh7th/cmp-nvim-lsp-signature-help" -- Make suggestions based on LSP.
     use "hrsh7th/nvim-cmp"-- Code completion.
+
+    -- Linting and Formatting
+    use {
+        "averms/black-nvim",
+        run = ':UpdateRemotePlugins'
+    }
+    use {'stsewd/isort.nvim', 
+        run = ':UpdateRemotePlugins'
+    }
+    use {'echasnovski/mini.nvim',
+    }
+    use {'echasnovski/mini.icons',
+        config = function() require('mini.icons').setup({ }) end
+    }
 
     -- lsp
     use "neovim/nvim-lspconfig"
@@ -77,15 +93,14 @@ return require('packer').startup(function()
     use {'kyazdani42/nvim-tree.lua', requires = {'kyazdani42/nvim-web-devicons'}, tag = 'nightly'}
 
     -- goyo-alternative
-    use 'pocco81/true-zen.nvim'
+    use 'folke/zen-mode.nvim'
 
     -- lualine
     use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
 
     -- colorscheme
-    use {
-        'neanias/everforest-nvim'
-    }
+    use "EdenEast/nightfox.nvim"
+
     use {
         'Mofiqul/dracula.nvim',
         config = function() require('dracula').setup({
@@ -93,7 +108,15 @@ return require('packer').startup(function()
             italic_comment = true
         }) end
     }
-    use 'drewtempelmeyer/palenight.vim'
+
+    use {
+        'nvim-zh/colorful-winsep.nvim'
+    }
+
+    -- indentation lines
+    use {
+        'lukas-reineke/indent-blankline.nvim'
+    }
 
     -- Latex plugin
     -- ! VIMSCRPIT
@@ -103,13 +126,12 @@ return require('packer').startup(function()
 
     -- Show colors
     use {
-        'norcalli/nvim-colorizer.lua',
+        'brenoprata10/nvim-highlight-colors',
     }
 
-    ---- EXPERIMENTAL
-    -- bufferline
     use {'akinsho/bufferline.nvim', tag='v4.*', requires='nvim-tree/nvim-web-devicons'}
 
+    use {'tpope/vim-fugitive'}
     use {'lewis6991/gitsigns.nvim'}
 
     use {'lewis6991/impatient.nvim'}
@@ -121,16 +143,26 @@ return require('packer').startup(function()
         }
     }
 
-    use {'stsewd/isort.nvim', 
-        run = ':UpdateRemotePlugins'
-    }
-
     use {'folke/todo-comments.nvim',
         requires = {'nvim-lua/plenary.nvim'}
     }
 
+    use({
+        "epwalsh/obsidian.nvim",
+        tag = "*",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
+            "nvim-telescope/telescope.nvim",
+        },
+    })
+
+    use({
+        'nosduco/remote-sshfs.nvim',
+    })
+
     if packer_bootstrap then
-      require('packer').sync()
+        require('packer').sync()
     end
 end)
 

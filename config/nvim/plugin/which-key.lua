@@ -17,12 +17,12 @@ wk.setup({
     }
 })
 
-wk.register({
-    f = { name = "File"},
-    c = { name = "Comments"},
-    h = { name = "Git"},
-    r = { name = "Reformat"},
-    t = { name = "File-Tree"},
-    z = { name = "Zen"},
-}, {prefix = "<leader>"})
+wk.add({
+    { "<leader>f", group="File" },
+    { "<leader>c", group="Comments" },
+    { "<leader>h", group="Git" },
+    { "<leader>r", group="Reformat" },
+    { "<leader>t", group="Tree" },
+    { "<leader>z", group="Zen" },
+})
 

@@ -1,5 +1,6 @@
 local dap = require('dap')
-require('dap-python').setup('~/.config/nvim/dap/debugpy/debugpy/bin/python')
+require('dap-python').setup('~/.local/venv/nvim/bin/python')
+require('dap-python').test_runner = 'pytest'
 require('nvim-dap-virtual-text').setup()
 
 local function get_arguments()
@@ -23,21 +24,26 @@ end
 
 dap.configurations.python = {
     {
-        type = "python";
-        request = "launch";
-        name = "Launch file";
-        program = "${file}";
+        type = "python",
+        request = "launch",
+        name = "Launch file",
+        program = "${file}",
+        console = "integratedTerminal",
+        justMyCode = false,
         pythonPath = function()
             local cwd = vim.fn.getcwd()
             if vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+                -- Use .venv/ directory.
                 return cwd .. '/.venv/bin/python'
             elseif vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+                -- If I should ever choose to use venv/ ...
                 return cwd .. '/venv/bin/python'
             else
-                return '/usr/bin/python'
+                -- Global pyenv-python version as fallback.
+                return '/home/dns.local/share/pyenv/shims/python'
             end
-        end;
-        args = get_arguments;
+        end,
+        args = get_arguments,
     }
 }
 
@@ -55,7 +61,9 @@ end
 
 -- Keymaps when the debugger is not running.
 vim.keymap.set('n', '<leader>dd', dap.toggle_breakpoint, {noremap = true, silent = true, desc = "Toggle breakpoint"})
-vim.keymap.set('n', '<leader>ds', dap.continue, {noremap = true, silent = true, desc = "Start/Stop debugger"})
+vim.keymap.set('n', '<leader>da', dap.continue, {noremap = true, silent = true, desc = "Start/Stop debugger"})
+--vim.keymap.set('n', '<leader>ds', dap.debug_selection(), {noremap = true, silent = true, desc = "Start/Stop debugger"})
+--vim.keymap.set('n', '<leader>dt', dap.test_method(), {noremap = true, silent = true, desc = "Start/Stop debugger"})
 
 local params = {noremap = true, silent = true, desc = "Toggle breakpoint", expr=true}
 -- Keymaps when the debugger is running.

@@ -1,10 +1,18 @@
 require('lualine').setup({
     options = {
         theme = 'dracula-nvim',
+        section_separators = {
+            left = '',
+            right = ''
+        },
+        component_separators = {
+            left = '',
+            right = ''
+        },
     },
     sections = {
         lualine_a = {'mode'},
-        lualine_b = {},
+        lualine_b = {'branch', 'diff'},
         lualine_c = {'filename'},
         lualine_x = {
             {
@@ -19,4 +27,5 @@ require('lualine').setup({
         'fzf',
         'nvim-tree',
     },
+    globalstatus = true,
 })

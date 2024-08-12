@@ -6,7 +6,7 @@ alias \
 	cp="cp -iv" \
 	mv="mv -iv" \
 	mkd="mkdir -pv" \
-	cat="bat --plain --theme OneHalfDark " \
+	cat="bat --plain --theme Dracula " \
     s="kitten ssh" # Kitty-stuff.
 
 # Colorize commands when possible
@@ -34,7 +34,15 @@ alias \
     open="xdg-open" \
     nb="newsboat" \
     bt="bluetuith" \
-    e="emacsclient -nc"
+    e="emacsclient -nc" \
+    y="yazi"
+
+# Clear pacman cache.
+# Remove orphaned packages.
+alias clean="""
+    yay -Scc;
+    yay -Qtdq | yay -Rns -;
+"""
 
 # Make aliasrc POSIX-compliant. Only load if command exists for this shell
 #if command -v pushd &> /dev/null
@@ -72,7 +80,7 @@ function save_remove {
 alias rm='save_remove'
 
 # Fuzzy Find
-alias fzf="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+# alias fzf="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
 function fuzzy_nvim_start {
     if [ "$#" -eq 0 ]; then
@@ -84,6 +92,7 @@ function fuzzy_nvim_start {
     fi
 }
 alias v='fuzzy_nvim_start'
+alias o='nvim +ObsidianSearch'
 
 ## Drag-and-drop in terminal
 alias drag='dragon-drop -a -x'
@@ -100,4 +109,4 @@ alias gpp='git push'
 alias mn='nvim+"Telescope man_pages layout_config={height=0.9}"'
 
 alias ma='ssh -o "ConnectTimeout=3" -L 16006:localhost:6006 -t ma "cd /media/student/Videodaten/dennis; bash --rcfile \"/media/student/Videodaten/dennis/.bashrc\""'
-alias miti='kitten ssh -o "ConnectTimeout=3" -L 16006:localhost:6006 -t miti "cd /media/mitiadmin/Micron_7450_1/lars/GraphNeuralNetwork; bash --rcfile \"/media/mitiadmin/Micron_7450_1/lars/GraphNeuralNetwork/.bashrc\""'
+alias miti='kitten ssh -o "ConnectTimeout=3" -t miti "bash --rcfile \"/media/mitiadmin/Micron_7450_1/lars/GraphNeuralNetwork/.bashrc\""'

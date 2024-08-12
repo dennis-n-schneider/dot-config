@@ -9,6 +9,7 @@ nvimtree.setup({
             list = {
                 {key = 'h', action = 'dir_up'},
                 {key = 'l', action = 'open'},
+                {key = '<', action = 'change_root_to_parent'},
             },
         },
     },
@@ -16,6 +17,9 @@ nvimtree.setup({
         group_empty = true,
     },
     filters = {
+        custom = {
+            "^.git$"
+        },
         dotfiles = true,
     },
 })

@@ -4,11 +4,11 @@
 rsync -Pav config/* ~/.config
 
 # Install packages.
-#if which yay &> /dev/null; then
-#    yay -Syu --needed $(awk '!/^#/{print $0}' packages-repository.txt)
-#else
-#    sudo pacman -Syu --needed $(awk '!/^#/{print $0}' packages-repository.txt)
-#fi
+if which yay &> /dev/null; then
+    yay -Syu --needed $(awk '!/^#/{print $0}' packages-repository.txt)
+else
+    sudo pacman -Syu --needed $(awk '!/^#/{print $0}' packages-repository.txt)
+fi
 
 # Setup zsh as default shell.
 mkdir -p ~/.cache/shell

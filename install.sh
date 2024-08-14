@@ -25,7 +25,11 @@ if [ "$(ls -A $rofi_theme_dir 2> /dev/null | wc -l)" -eq 0 ]; then
 fi
 
 # Apply mods
-sh ./mods/workbenches/install.sh
-#while IFS= read -r line; do
-#    $(sh mods/$line/install.sh)
-#done < "mods.txt"
+awk '
+/^\[mods\]/ { in_mods_section = 1; next }
+/^\[.*\]/ && in_mods_section { exit }
+in_mods_section { print $0 }
+' config.toml | while IFS= read -r mod_name; do
+    sh "mods/$mod_name/install.sh"
+done
+

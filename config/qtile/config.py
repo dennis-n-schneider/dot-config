@@ -165,7 +165,7 @@ extension_defaults = widget_defaults.copy()
 
 groupbox = widget.GroupBox(
     center_aligned=True,
-    this_current_screen_border="#EEEEFF",
+    this_current_screen_border="#EEEEFF00",
     active="#7777BB",
     background="#000000.0",
     fontsize=12,

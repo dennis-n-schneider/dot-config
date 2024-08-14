@@ -7,15 +7,13 @@ xrdb -I$XDG_CONFIG_HOME/x11 $XDG_CONFIG_HOME/x11/Xresources
 xwallpaper --zoom ~/Pictures/wallpapers/purple.jpg
 
 # Set random lockscreen.
-# Move to background since this command takes a little while.
 betterlockscreen -u ~/Pictures/lockscreens/ &
 
 dunst &
 unclutter &
 udiskie &
 picom -b
-conky --config=$XDG_CONFIG_HOME/conky/conky-quotem.conf -d
-# conky --config=$XDG_CONFIG_HOME/conky/conky-taskwarrior.conf -d
+conky --config=$XDG_CONFIG_HOME/conky/conky.conf -d
 flameshot &
 # Start program to notify on changing home-directory.
 sh $XDG_DATA_HOME/pynnacle/watch-home.sh &

@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Copy configurations.
-cp -ar config/* ~/.config
+rsync -Pav config/* ~/.config
 
 # Install packages.
-if which yay &> /dev/null; then
-    yay -Syu --needed $(awk '!/^#/{print $0}' packages-repository.txt)
-else
-    sudo pacman -Syu --needed $(awk '!/^#/{print $0}' packages-repository.txt)
-fi
+#if which yay &> /dev/null; then
+#    yay -Syu --needed $(awk '!/^#/{print $0}' packages-repository.txt)
+#else
+#    sudo pacman -Syu --needed $(awk '!/^#/{print $0}' packages-repository.txt)
+#fi
 
 # Setup zsh as default shell.
 mkdir -p ~/.cache/shell
@@ -25,6 +25,7 @@ if [ "$(ls -A $rofi_theme_dir 2> /dev/null | wc -l)" -eq 0 ]; then
 fi
 
 # Apply mods
-while IFS= read -r line; do
-    $(sh mods/$line/install.sh)
-done < "mods.txt"
+sh ./mods/workbenches/install.sh
+#while IFS= read -r line; do
+#    $(sh mods/$line/install.sh)
+#done < "mods.txt"

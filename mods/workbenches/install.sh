@@ -13,3 +13,5 @@ wget --content-disposition -P $TMP_DIR "https://raw.githubusercontent.com/dennis
 rsync -av $TMP_DIR/* $QTILE_CONFIG_DIR
 
 patch $QTILE_CONFIG_DIR/config.py ./workbenches.diff
+
+rm $TMP_DIR/*

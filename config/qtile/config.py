@@ -56,7 +56,7 @@ keys = [
 ]
 
 
-groups = [Group(i) for i in "123456789"]
+groups = [Group(i, label="󰝥") for i in "123456789"]
 
 for i in groups:
     keys.extend(

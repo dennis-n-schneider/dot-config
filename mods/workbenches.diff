@@ -1,0 +1,51 @@
+4a5,6
+> import workbenches as wb
+> 
+59c61
+< groups = [Group(i, label="󰝥") for i in "123456789"]
+---
+> groups = wb.init(group_names=list("123456789"))
+61c63
+< for i in groups:
+---
+> for i in range(len(wb.workbenches.active.groups)):
+67,69c69,71
+<                 i.name,
+<                 lazy.group[i.name].toscreen(),
+<                 desc="Switch to group {}".format(i.name),
+---
+>                 str(i+1),
+>                 wb.go_to_screen(i),
+>                 desc="Switch to group {}".format(str(i+1)),
+74,76c76,84
+<                 i.name,
+<                 lazy.window.togroup(i.name, switch_group=True),
+<                 desc="Switch to & move focused window to group {}".format(i.name),
+---
+>                 str(i+1),
+>                 wb.move_to_screen(i, switch_group=False),
+>                 desc="Switch to & move focused window to group {}".format(str(i+1)),
+>             ),
+>             Key(
+>                 [mod],
+>                 "escape",
+>                 wb.cycle_workbenches(),
+>                 desc="Cycle between workbenches",
+166c174,182
+< groupbox = widget.GroupBox(
+---
+> wb.icon_widget = widget.TextBox(wb.workbenches.active.icon,
+>                     foreground="#7777BB",
+>                     background=bar_color, 
+>                     padding=0,
+>                     fontshadow=bar_color,
+>                     fontsize=16)
+> 
+> wb.groupbox = widget.GroupBox(
+>     visible_groups=wb.workbenches.active.groups,
+177a194
+>                 wb.icon_widget,
+188c205
+<                 groupbox,
+---
+>                 wb.groupbox,

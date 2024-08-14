@@ -2,7 +2,6 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 
-import workenvs
 
 mod = "mod4"
 terminal = "kitty"
@@ -57,8 +56,27 @@ keys = [
 ]
 
 
-groups = workenvs.setup_workenvs_groups()
-keys.extend(workenvs.setup_workenv_keys([mod], "escape"))
+groups = [Group(i) for i in "123456789"]
+
+for i in groups:
+    keys.extend(
+        [
+            # mod + group number = switch to group
+            Key(
+                [mod],
+                i.name,
+                lazy.group[i.name].toscreen(),
+                desc="Switch to group {}".format(i.name),
+            ),
+            # mod + shift + group number = switch to & move focused window to group
+            Key(
+                [mod, "shift"],
+                i.name,
+                lazy.window.togroup(i.name, switch_group=True),
+                desc="Switch to & move focused window to group {}".format(i.name),
+            ),
+        ]
+    )
 
 groups.extend([
     ScratchPad('scratchpads', [
@@ -145,11 +163,18 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+groupbox = widget.GroupBox(
+    center_aligned=True,
+    this_current_screen_border="#EEEEFF",
+    active="#7777BB",
+    background="#000000.0",
+    fontsize=12,
+)
+
 screens = [
     Screen(
         top=bar.Bar(
             [
-                workenvs.env_widget,
                 widget.Memory(format='{MemUsed: .0f} {mm}'),
                 widget.Sep(),
                 widget.ThermalSensor(),
@@ -160,7 +185,7 @@ screens = [
                                fontshadow=bar_color,
                                fontsize=16),
                 widget.Spacer(background="#000000.0"),
-                workenvs.gb,
+                groupbox,
                 widget.Spacer(background="#000000.0"),
                 widget.TextBox("", 
                                foreground=bar_color, 

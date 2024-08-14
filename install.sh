@@ -24,3 +24,7 @@ if [ "$(ls -A $rofi_theme_dir 2> /dev/null | wc -l)" -eq 0 ]; then
     curl https://raw.githubusercontent.com/dracula/rofi/master/theme/config1.rasi -o "$rofi_theme_dir"/theme.rasi
 fi
 
+# Apply mods
+while IFS= read -r line; do
+    $(sh mods/$line/install.sh)
+done < "mods.txt"

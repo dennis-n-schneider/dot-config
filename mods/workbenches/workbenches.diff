@@ -43,9 +43,9 @@
 > 
 > wb.groupbox = widget.GroupBox(
 >     visible_groups=wb.workbenches.active.groups,
-177a194
+178a195
 >                 wb.icon_widget,
-188c205
+189c206
 <                 groupbox,
 ---
 >                 wb.groupbox,

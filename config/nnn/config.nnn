@@ -1,6 +1,9 @@
 #!/bin/sh
 
-export NNN_OPTS='AHe' # 'AHe'
-export NNN_PLUG='f:finder;o:fzopen;v:imgview;p:preview-tui'
-set --export NNN_FIFO='/tmp/nnn.fifo'
+export NNN_OPENER=/home/dns/.config/nnn/plugins/nuke
+export NNN_OPTS='ca'
+export NNN_FIFO='/tmp/nnn.fifo'
+export NNN_PLUG='p:preview-tui;d:dragdrop'
+export NNN_FCOLORS="D4DEB778E79F9F67D2E5E5D2"
+
 

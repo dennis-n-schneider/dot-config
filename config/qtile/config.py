@@ -1,24 +1,31 @@
 from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
+from libqtile import extension
 
 
 mod = "mod4"
+mod1 = "mod1"
 terminal = "kitty"
 
 
 keys = [
     # Switch between windows.
-    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    # Move windows within workspace.
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
-    # Grow/Shrink windows.
-    Key([mod, "shift"], "h", lazy.layout.shrink(), desc="Grow window to the right"),
-    Key([mod, "shift"], "l", lazy.layout.grow(), desc="Grow window to the left"),
+    Key([mod1], "tab", lazy.spawn("rofi -show window")),
+    Key([mod], "j", lazy.layout.down()),
+    Key([mod], "k", lazy.layout.up()),
+    Key([mod], "h", lazy.layout.left()),
+    Key([mod], "l", lazy.layout.right()),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
+    Key([mod, "control"], "j", lazy.layout.grow_down()),
+    Key([mod, "control"], "k", lazy.layout.grow_up()),
+    Key([mod, "control"], "h", lazy.layout.grow_left()),
+    Key([mod, "control"], "l", lazy.layout.grow_right()),
+    Key([mod, "shift"], "n", lazy.layout.normalize()),
+    Key([mod, "shift"], "space", lazy.layout.toggle_split()),
     # Window Management.
     Key([mod], "f", lazy.window.toggle_floating(), desc="Toggle floating"),
     Key([mod], "Tab", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
@@ -31,13 +38,15 @@ keys = [
     # Programs/Scripts.
     Key([mod], "r", lazy.spawn("ruler"), desc="Ruler"),
     Key([mod], "p", lazy.spawn("sh .config/wm/scripts/pass_menu.sh"), desc="Password manager"),
-    Key([mod], "Return", lazy.spawn(f"{terminal} -e tmux"), desc="Terminal"),
+    Key([mod], "Return", lazy.spawn(f"{terminal}"), desc="Terminal"),
     Key([mod], "b", lazy.spawn("qutebrowser"), desc="Browser"),
     # Auxiliary usages.
     Key([mod], "c", lazy.spawn("sh .config/wm/scripts/toggle_battery_mode.sh"), desc="Toggle battery usage mode"),
     Key([mod, "shift"], "t", lazy.spawn("sh .config/wm/scripts/toggle_mousepad.sh"), desc="Toggle trackpad"),
     Key([mod, "control"], "delete", lazy.spawn("betterlockscreen --lock"), desc="Lock screen"),
-    Key([mod], "space", lazy.spawn("rofi -show run"), desc="Application launcher"),
+    Key([mod], "space", lazy.run_extension(extension.DmenuRun(
+        dmenu_command = "rofi -show run",
+    )), desc="Application launcher"),
     Key([mod], "s", lazy.spawn("flameshot gui"), desc="Screenshot"),
     Key([mod, "shift"], "s", lazy.spawn("flameshot screen"), desc="Screenshot entire screen"),
     Key([mod], "i", lazy.spawn("sh .config/wm/scripts/invert_colors.sh"), desc="Invert colors of focused window"),
@@ -122,7 +131,7 @@ groups.extend([
         ),
         DropDown(
             'files',
-            f'{terminal} -e yazi',
+            f'{terminal} -e nnn',
             height = 0.8,
             width = 0.4,
             x = 0.5,
@@ -135,20 +144,22 @@ groups.extend([
 
 layout_default_args = {
     "border_focus":"#BD93F9",
-    "border_width":1,
+    "border_width":2,
+    "margin":3,
     "new_client_position":"bottom",
     "single_border_width":0,
 }
 
 layouts = [
+    layout.Bsp(
+        fair=False,
+        ratio=1.4,
+        **layout_default_args
+    ),
     layout.MonadTall(
         **layout_default_args
     ),
     layout.MonadWide(
-        **layout_default_args
-    ),
-    layout.Bsp(
-        fair=False,
         **layout_default_args
     ),
 ]
@@ -237,6 +248,7 @@ floating_layout = layout.Floating(
         Match(wm_class="com.cisco.anyconnect.gui"),  # GPG key password entry
         Match(wm_class="Tk"), # Tkinter stuff.
         Match(wm_class="Toplevel"), # Tkinter stuff.
+        Match(wm_class="zoom"), # Zoom.
     ]
 )
 auto_fullscreen = True

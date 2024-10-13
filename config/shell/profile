@@ -37,6 +37,7 @@ export PARALLEL_HOME="$XDG_DATA_HOME/parallel"
 
 # Own scripts-directory
 export PYNNACLE_DATA=$XDG_DATA_HOME/pynnacle
+export BASH_LIB=$XDG_DATA_HOME/lib/bash
 
 
 # Application-specific configurations

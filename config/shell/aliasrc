@@ -91,8 +91,12 @@ function fuzzy_nvim_start {
         nvim $@
     fi
 }
-alias v='fuzzy_nvim_start'
+alias vim='fuzzy_nvim_start'
 alias o='nvim +ObsidianSearch'
+
+alias venv='python -m venv .venv'
+alias enter='source .venv/bin/activate'
+alias leave='deactivate'
 
 ## Drag-and-drop in terminal
 alias drag='dragon-drop -a -x'

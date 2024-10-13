@@ -24,18 +24,6 @@ HISTFILE=$XDG_CACHE_HOME/shell/histfile
 # PLUGINS
 ####################################################################################
 
-# Custom source-on-enter/exit plugin
-autoload -U add-zsh-hook
-load-enter-script() { 
-    if [[ -f ~-/.exit && -r ~-/.exit ]]; then
-        source ~-/.exit
-    fi
-    if [[ -f .enter && -r .enter ]]; then
-        source .enter
-    fi
-}
-add-zsh-hook chpwd load-enter-script
-
 # fzf-integration in completion-selection menu
 [ ! -f $XDG_DATA_HOME/fzf-tab/fzf-tab.plugin.zsh ] || source $XDG_DATA_HOME/fzf-tab/fzf-tab.plugin.zsh
 

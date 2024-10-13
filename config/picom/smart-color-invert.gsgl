@@ -74,10 +74,10 @@ vec4 window_shader() {
     vec4 c = texelFetch(tex, ivec2(texcoord), 0);
     vec4 inv = c;
     if (
-        texcoord.y >= 1 &&
-        texcoord.x >= 1 &&
-        texcoord.y <= window_size.y-1 &&
-        texcoord.x <= window_size.x-1
+        texcoord.y >= 3 &&
+        texcoord.x >= 3 &&
+        texcoord.y <= window_size.y-3 &&
+        texcoord.x <= window_size.x-3
     ) {
         inv = vec4(invert_lightness(vec3(c[0], c[1], c[2])), c[3]);
     }

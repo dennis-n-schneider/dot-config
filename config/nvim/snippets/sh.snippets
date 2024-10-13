@@ -1,0 +1,21 @@
+snippet cd_here "cd to this script before executing"
+	cd "$(dirname "${BASH_SOURCE[0]}")"
+
+snippet lib "import local BASH_LIB"
+	source "$BASH_LIB$1"
+
+snippet arr "Create array"
+	$1=($2 $3 $4)
+
+snippet len "get length of array"
+	${#$1[@]}
+
+snippet foreach "For each elem in list"
+	for $1 in "${$2[@]}" ; do
+		$3
+	done
+
+snippet range "Alias for seq <start> <end>"
+	seq
+
+

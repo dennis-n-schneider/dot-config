@@ -1,0 +1,6 @@
+14a15
+>     sidebar-mode: true;
+17c18
+< @theme "~/.local/share/rofi/themes/dracula.rasi"
+---
+> @theme "~/.local/share/rofi/themes/dracula_sidebar.rasi"

@@ -3,4 +3,4 @@
 17c18
 < @theme "~/.local/share/rofi/themes/dracula.rasi"
 ---
-> @theme "~/.local/share/rofi/themes/dracula_sidebar.rasi"
+> @theme "./dracula_sidebar.rasi"

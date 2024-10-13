@@ -12,7 +12,6 @@ configuration {
     hide-scrollbar: true;
     display-run: " 󰍉";
     display-window: " ";
-    sidebar-mode: true;
 }
 
-@theme "~/.local/share/rofi/themes/dracula_sidebar.rasi"
+@theme "~/.local/share/rofi/themes/dracula.rasi"

@@ -6,3 +6,6 @@ Enables the [Qtile Workbenches](https://github.com/dennis-n-schneider/qtile-work
 ## quotem
 Lightweight conky-configuration for showing motivating quotes on the wallpaper.
 For further information, see [quotem](https://github.com/dennis-n-schneider/quotem).
+
+## Rofi Sidebar
+Have the rofi application manager as a sidebar

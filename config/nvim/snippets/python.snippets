@@ -14,3 +14,32 @@ snippet argparse "Create the ArgumentParser"
 		parser.add_argument(${3:argument3})
 		args = parser.parse_args()
 
+snippet initlog "Initialize fancy error-logging"
+	from loguru import logger
+	import sys
+
+
+	def _log_uncaught_exceptions(exctype, value, traceback):
+		logger.opt(exception=(exctype, value, traceback)).error("Uncaught exception.")
+	sys.excepthook = _log_uncaught_exceptions
+
+snippet deterministic "Make torch-project deterministic. Also set PYTHONHASHSEED=42"
+	def make_deterministic(seed=42):
+		# Consistent hashes (dict generation, ...)
+		import os
+		assert os.environ['PYTHONHASHSEED'] is not None, f"Please set env-var PYTHONHASHSEED manually to {seed}."
+
+		# PyTorch
+		import torch
+		torch.manual_seed(seed)
+		if torch.cuda.is_available():
+			torch.backends.cudnn.deterministic = True
+			torch.backends.cudnn.benchmark = False
+		
+		# Numpy
+		import numpy as np
+		np.random.seed(seed)
+		
+		# Built-in Python
+		import random
+		random.seed(seed)

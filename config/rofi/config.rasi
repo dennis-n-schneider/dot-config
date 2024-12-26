@@ -12,6 +12,7 @@ configuration {
     hide-scrollbar: true;
     display-run: " 󰍉";
     display-window: " ";
+    display-clipboard: " 󰨸";
 }
 
 @theme "~/.local/share/rofi/themes/dracula.rasi"

@@ -1,17 +1,17 @@
-from libqtile import bar, layout, widget
+from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile import extension
+import subprocess
 
 
 mod = "mod4"
-mod1 = "mod1"
 terminal = "kitty"
 
 
 keys = [
     # Switch between windows.
-    Key([mod1], "tab", lazy.spawn("rofi -show window")),
+    Key([mod], "slash", lazy.spawn("rofi -show window")),
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "k", lazy.layout.up()),
     Key([mod], "h", lazy.layout.left()),
@@ -62,6 +62,7 @@ keys = [
     Key([mod, "shift"], 'a', lazy.spawn("sh .config/wm/scripts/download_music.sh"), desc="Audio download utility"),
     Key([mod], 'o', lazy.group['scratchpads'].dropdown_toggle('obsidian'), desc="Obsidian"),
     Key([mod], 'y', lazy.group['scratchpads'].dropdown_toggle('files'), desc="File manager"),
+    Key([mod], 'v', lazy.spawn("rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"), desc="Clipboard manager"),
 ]
 
 
@@ -112,16 +113,6 @@ groups.extend([
         DropDown(
             'math',
             f'{terminal} -e kalc',
-            height = 0.8,
-            width = 0.4,
-            x = 0.5,
-            y = 0.1,
-            on_focus_lost_hide = True,
-            warp_pointer = True,
-        ),
-        DropDown(
-            'obsidian',
-            f'{terminal} -e nvim +ObsidianSearch',
             height = 0.8,
             width = 0.4,
             x = 0.5,
@@ -276,3 +267,13 @@ wmname = "LG3D"
 # def change_group():
 #    screens[0].bottom.show(False)
 
+@hook.subscribe.startup_once
+def autostart():
+    processes = [
+        ['obsidian'],
+        ['zotero'],
+    ]
+
+    logger.info("hi")
+    for p in processes:
+        subprocess.Popen(p)

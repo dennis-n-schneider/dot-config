@@ -65,7 +65,7 @@ alias net-connect="nmcli device wifi connect" # --ask"
 
 alias vpn="sudo openconnect --protocol=anyconnect 'rawiss.med.tum.de'"
 
-alias eduroam-connect='sudo systemctl stop NetworkManager; sudo killall wpa_supplicant; sudo systemctl start dhcpcd; sudo wpa_supplicant -i wlan0 -c /etc/wpa_supplicant/eduroam.conf &'
+alias eduroam-connect='sudo systemctl stop NetworkManager; sudo killall wpa_supplicant; sudo systemctl start dhcpcd; sudo wpa_supplicant -i wlan0 -c /etc/wpa_supplicant/eduroam.conf'
 alias eduroam-disconnect='sudo pkill wpa_supplicant; sudo systemctl stop dhcpcd; sudo systemctl start NetworkManager'
 
 # Administration: lpadmin -p ts5000 -E -m everywhere -v ipp://192.168.2.138
@@ -114,3 +114,13 @@ alias mn='nvim+"Telescope man_pages layout_config={height=0.9}"'
 
 alias ma='ssh -o "ConnectTimeout=3" -L 16006:localhost:6006 -t ma "cd /media/student/Videodaten/dennis; bash --rcfile \"/media/student/Videodaten/dennis/.bashrc\""'
 alias miti='kitten ssh -o "ConnectTimeout=3" -t miti "bash --rcfile \"/media/mitiadmin/Micron_7450_1/lars/GraphNeuralNetwork/.bashrc\""'
+
+alias pkill="ps aux | fzf --height 40% --layout=reverse --prompt='Select process to kill: ' | awk '{print $2}' | xargs -r sudo kill"
+
+function logg() {
+    git lg | fzf --ansi --no-sort \
+        --preview 'echo {} | grep -o "[a-f0-9]\{7\}" | head -1 | xargs -I % git show % --color=always' \
+        --preview-window=right:50%:wrap --height 100% \
+        --bind 'enter:execute(echo {} | grep -o "[a-f0-9]\{7\}" | head -1 | xargs -I % sh -c "git show % | nvim -c \"setlocal buftype=nofile bufhidden=wipe noswapfile nowrap\" -c \"nnoremap <buffer> q :q!<CR>\" -")' \
+        --bind 'ctrl-e:execute(echo {} | grep -o "[a-f0-9]\{7\}" | head -1 | xargs -I % sh -c "gh browse %")'
+}

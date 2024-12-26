@@ -8,7 +8,7 @@ unsetopt PROMPT_SP
 
 # Default programs
 export EDITOR="/usr/bin/nvim"
-export TERMINAL="/usr/bin/alacritty"
+export TERMINAL="/usr/bin/kitty"
 export BROWSER="/usr/bin/qutebrowser"
 
 # Home cleanup

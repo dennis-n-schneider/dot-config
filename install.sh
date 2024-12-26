@@ -1,7 +1,14 @@
 #!/bin/bash
 
+# Make variables also available in 
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-"~/.cache"}
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-"~/.config"}
+export XDG_DATA_HOME=${XDG_DATA_HOME:-"~/.local/share"}
+export DOT_CONFIG_CACHE_HOME=${DOT_CONFIG_CACHE_HOME:-"$XDG_CACHE_HOME/dot-config"}
+[ -d $DOT_CONFIG_CACHE_HOME ] || mkdir -p $DOT_CONFIG_CACHE_HOME
+
 # Copy configurations.
-rsync -Pav config/* ~/.config
+rsync -Pav config/* $XDG_CONFIG_HOME
 
 # Install packages.
 if which yay &> /dev/null; then
@@ -11,15 +18,15 @@ else
 fi
 
 # Setup zsh as default shell.
-mkdir -p ~/.cache/shell
+mkdir -p "$XDG_CACHE_HOME/shell"
 if [ $(basename "$SHELL") != "zsh" ]; then
     chsh -s /bin/zsh
 fi
-echo "export ZDOTDIR=$HOME/.config/zsh" > ~/.zshenv
+echo "export ZDOTDIR=$XDG_CONFIG_HOME/zsh" > ~/.zshenv
 
 # Setup rofi theme (Dracula).
-rofi_theme_dir="$HOME/.local/share/rofi/themes"
-mkdir -p $rofi_theme_dir
+rofi_theme_dir="$XDG_DATA_HOME/rofi/themes"
+mkdir -p "$rofi_theme_dir"
 if [ "$(ls -A $rofi_theme_dir 2> /dev/null | wc -l)" -eq 0 ]; then
     curl https://raw.githubusercontent.com/dracula/rofi/master/theme/config1.rasi -o "$rofi_theme_dir"/theme.rasi
 fi

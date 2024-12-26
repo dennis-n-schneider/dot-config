@@ -4,7 +4,7 @@ ttf-hack-nerd
 alacritty
 qutebrowser
 nsxiv
-zoxide
+sioyek-git
 zsh
 starship
 picom
